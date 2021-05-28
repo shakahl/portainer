@@ -16,6 +16,7 @@ import (
 // @description **Access policy**: administrator
 // @tags teams
 // @security jwt
+// @param id path string true "Team Id"
 // @success 204 "Success"
 // @failure 400 "Invalid request"
 // @failure 403 "Permission denied"
