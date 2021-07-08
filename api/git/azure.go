@@ -3,14 +3,15 @@ package git
 import (
 	"context"
 	"fmt"
-	"github.com/pkg/errors"
-	"github.com/portainer/portainer/api/archive"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
 	"strings"
+
+	"github.com/pkg/errors"
+	"github.com/portainer/portainer/api/archive"
 )
 
 const (
@@ -37,7 +38,7 @@ type azureDownloader struct {
 
 func NewAzureDownloader(client *http.Client) *azureDownloader {
 	return &azureDownloader{
-		client: client,
+		client:  client,
 		baseUrl: "https://dev.azure.com",
 	}
 }
