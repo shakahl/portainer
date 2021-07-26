@@ -19,8 +19,8 @@ module.exports = function (grunt) {
     binaries: {
       dockerLinuxVersion: '19.03.13',
       dockerWindowsVersion: '19-03-12',
-      dockerLinuxComposeVersion: '1.27.4',
-      dockerWindowsComposeVersion: '1.28.0',
+      dockerLinuxComposeVersion: '1.29.2',
+      dockerWindowsComposeVersion: '1.29.2',
       komposeVersion: 'v1.22.0',
       kubectlVersion: 'v1.18.0',
     },
@@ -191,7 +191,7 @@ function shell_download_docker_binary(p, a) {
   var ip = ps[p] === undefined ? p : ps[p];
   var ia = as[a] === undefined ? a : as[a];
   var binaryVersion = p === 'windows' ? '<%= binaries.dockerWindowsVersion %>' : '<%= binaries.dockerLinuxVersion %>';
-  
+
   return [
     'if [ -f dist/docker ] || [ -f dist/docker.exe ]; then',
     'echo "docker binary exists";',
@@ -207,7 +207,7 @@ function shell_download_docker_compose_binary(p, a) {
   var ip = ps[p] || p;
   var ia = as[a] || a;
   var binaryVersion = p === 'windows' ? '<%= binaries.dockerWindowsComposeVersion %>' : '<%= binaries.dockerLinuxComposeVersion %>';
-  
+
   return [
     'if [ -f dist/docker-compose ] || [ -f dist/docker-compose.exe ]; then',
     'echo "Docker Compose binary exists";',
@@ -219,7 +219,7 @@ function shell_download_docker_compose_binary(p, a) {
 
 function shell_download_kompose_binary(p, a) {
   var binaryVersion = '<%= binaries.komposeVersion %>';
-  
+
   return [
     'if [ -f dist/kompose ] || [ -f dist/kompose.exe ]; then',
     'echo "kompose binary exists";',
@@ -231,7 +231,7 @@ function shell_download_kompose_binary(p, a) {
 
 function shell_download_kubectl_binary(p, a) {
   var binaryVersion = '<%= binaries.kubectlVersion %>';
-  
+
   return [
     'if [ -f dist/kubectl ] || [ -f dist/kubectl.exe ]; then',
     'echo "kubectl binary exists";',
