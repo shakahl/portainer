@@ -266,14 +266,14 @@ div.input-mask {
  * Sidebar
  */
 #sidebar-wrapper {
-  background: var(--bg-sidebar-color);
+  background: var(--bg-sidebar-wrapper-color);
 }
 ul.sidebar .sidebar-main a,
 .sidebar-footer,
 ul.sidebar .sidebar-list a:hover,
 #page-wrapper:not(.open) ul.sidebar .sidebar-title.separator {
   /* Sidebar header and footer color */
-  background: #2d3e63;
+  background: var(--hover-sidebar-color);
 }
 ul.sidebar {
   position: absolute;
@@ -323,7 +323,7 @@ ul.sidebar .sidebar-list {
 ul.sidebar .sidebar-list a {
   text-indent: 25px;
   font-size: 15px;
-  color: #b2bfdc;
+  color: var(--text-sidebar-list-color);
   line-height: 40px;
 }
 ul.sidebar .sidebar-list a:hover {
@@ -371,7 +371,7 @@ ul.sidebar .sidebar-list .menu-icon {
   text-align: center;
 }
 .sidebar-footer div a {
-  color: #b2bfdc;
+  color: var(--text-sidebar-list-color);
   font-size: 12px;
   line-height: 43px;
 }
