@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	kube "github.com/portainer/portainer/api/http/handler/kubernetes"
 	"log"
 	"net/http"
 	"path/filepath"
@@ -161,7 +160,7 @@ func (server *Server) Start() error {
 
 	var fileHandler = file.NewHandler(filepath.Join(server.AssetsPath, "public"))
 
-	var kubernetesHandler = kube.NewHandler(requestBouncer, server.AuthorizationService)
+	var kubernetesHandler = kube.NewHandler(requestBouncer)
 	kubernetesHandler.DataStore = server.DataStore
 	kubernetesHandler.KubernetesClientFactory = server.KubernetesClientFactory
 

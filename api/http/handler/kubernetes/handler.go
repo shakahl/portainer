@@ -7,7 +7,6 @@ import (
 	httperror "github.com/portainer/libhttp/error"
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/http/security"
-	"github.com/portainer/portainer/api/internal/authorization"
 	"github.com/portainer/portainer/api/kubernetes/cli"
 )
 
@@ -16,7 +15,6 @@ type Handler struct {
 	*mux.Router
 	DataStore               portainer.DataStore
 	KubernetesClientFactory *cli.ClientFactory
-	authorizationService    *authorization.Service
 }
 
 // NewHandler creates a handler to process pre-proxied requests to external APIs.
