@@ -3,7 +3,6 @@ package endpointproxy
 import (
 	"errors"
 	"fmt"
-	"strings"
 	"time"
 
 	httperror "github.com/portainer/libhttp/error"
@@ -67,16 +66,9 @@ func (handler *Handler) proxyRequestsToKubernetesAPI(w http.ResponseWriter, r *h
 
 	requestPrefix := fmt.Sprintf("/%d/kubernetes", endpointID)
 	if endpoint.Type == portainer.AgentOnKubernetesEnvironment || endpoint.Type == portainer.EdgeAgentOnKubernetesEnvironment {
-		if isKubernetesRequest(strings.TrimPrefix(r.URL.String(), requestPrefix)) {
-			requestPrefix = fmt.Sprintf("/%d", endpointID)
-		}
+		requestPrefix = fmt.Sprintf("/%d", endpointID)
 	}
 
 	http.StripPrefix(requestPrefix, proxy).ServeHTTP(w, r)
 	return nil
-}
-
-func isKubernetesRequest(requestURL string) bool {
-	// prefix list can be retrieved from hitting k8s api server root url (/)
-	return strings.HasPrefix(requestURL, "/api") || strings.HasPrefix(requestURL, "/healthz") || strings.HasPrefix(requestURL, "/version")
 }
