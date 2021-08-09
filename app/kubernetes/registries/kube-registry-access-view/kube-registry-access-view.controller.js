@@ -39,7 +39,7 @@ export default class KubernetesRegistryAccessController {
         if (appsUsingRegistry) {
           const displayedMessage =
             'This registry is currently used by one or more applications inside this environment. Removing the registry access could lead to a service interruption for these applications.<br/><br/>Do you wish to continue?';
-          this.ModalService.confirmUpdate(displayedMessage, (confirmed) => {
+          this.ModalService.confirmDeletion(displayedMessage, (confirmed) => {
             if (confirmed) {
               return this.updateNamespaces(nsToUpdate);
             }
