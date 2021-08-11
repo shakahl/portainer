@@ -2,6 +2,7 @@ var os = require('os');
 var loadGruntTasks = require('load-grunt-tasks');
 const webpackDevConfig = require('./webpack/webpack.develop');
 const webpackProdConfig = require('./webpack/webpack.production');
+const webpackTestingConfig = require('./webpack/webpack.testing');
 
 var arch = os.arch();
 if (arch === 'x64') arch = 'amd64';
@@ -73,7 +74,7 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.task.registerTask('devopsbuild', 'devopsbuild:<platform>:<arch>:env', function (p, a, env = 'prod') {
+  grunt.task.registerTask('devopsbuild', 'devopsbuild:<platform>:<arch>:<env>', function (p, a, env = 'prod') {
     grunt.task.run([
       'config:prod',
       `env:${env}`,
@@ -84,7 +85,7 @@ module.exports = function (grunt) {
       'shell:download_docker_compose_binary:' + p + ':' + a,
       'shell:download_kompose_binary:' + p + ':' + a,
       'shell:download_kubectl_binary:' + p + ':' + a,
-      'webpack:prod',
+      `webpack:${env}`,
     ]);
   });
 };
@@ -108,6 +109,7 @@ gruntfile_cfg.webpack = {
   dev: webpackDevConfig,
   devWatch: Object.assign({ watch: true }, webpackDevConfig),
   prod: webpackProdConfig,
+  testing: webpackTestingConfig,
 };
 
 gruntfile_cfg.config = {
@@ -194,7 +196,7 @@ function shell_download_docker_binary(p, a) {
   var ip = ps[p] === undefined ? p : ps[p];
   var ia = as[a] === undefined ? a : as[a];
   var binaryVersion = p === 'windows' ? '<%= binaries.dockerWindowsVersion %>' : '<%= binaries.dockerLinuxVersion %>';
-  
+
   return [
     'if [ -f dist/docker ] || [ -f dist/docker.exe ]; then',
     'echo "docker binary exists";',
@@ -210,7 +212,7 @@ function shell_download_docker_compose_binary(p, a) {
   var ip = ps[p] || p;
   var ia = as[a] || a;
   var binaryVersion = p === 'windows' ? '<%= binaries.dockerWindowsComposeVersion %>' : '<%= binaries.dockerLinuxComposeVersion %>';
-  
+
   return [
     'if [ -f dist/docker-compose ] || [ -f dist/docker-compose.exe ]; then',
     'echo "Docker Compose binary exists";',
@@ -222,7 +224,7 @@ function shell_download_docker_compose_binary(p, a) {
 
 function shell_download_kompose_binary(p, a) {
   var binaryVersion = '<%= binaries.komposeVersion %>';
-  
+
   return [
     'if [ -f dist/kompose ] || [ -f dist/kompose.exe ]; then',
     'echo "kompose binary exists";',
@@ -234,7 +236,7 @@ function shell_download_kompose_binary(p, a) {
 
 function shell_download_kubectl_binary(p, a) {
   var binaryVersion = '<%= binaries.kubectlVersion %>';
-  
+
   return [
     'if [ -f dist/kubectl ] || [ -f dist/kubectl.exe ]; then',
     'echo "kubectl binary exists";',
