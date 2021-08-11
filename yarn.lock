@@ -1333,6 +1333,7 @@ angular-moment-picker@^0.10.2:
   dependencies:
     angular-mocks "1.6.1"
     angular-sanitize "1.6.1"
+    lodash-es "^4.17.15"
 
 angular-resource@1.8.0:
   version "1.8.0"
@@ -5163,13 +5164,6 @@ grunt-cli@~1.2.0:
     grunt-known-options "~1.1.0"
     nopt "~3.0.6"
     resolve "~1.1.0"
-
-grunt-config@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/grunt-config/-/grunt-config-1.0.0.tgz#e0a20e4cbadb8ae90843697a8afa05af8aeb860c"
-  integrity sha1-4KIOTLrbiukIQ2l6ivoFr4rrhgw=
-  dependencies:
-    chalk "^1.1.0"
 
 grunt-contrib-clean@^2.0.0:
   version "2.0.0"
