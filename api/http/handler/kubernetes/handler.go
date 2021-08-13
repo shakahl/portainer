@@ -15,6 +15,7 @@ type Handler struct {
 	*mux.Router
 	DataStore               portainer.DataStore
 	KubernetesClientFactory *cli.ClientFactory
+	JwtService              portainer.JWTService
 }
 
 // NewHandler creates a handler to process pre-proxied requests to external APIs.

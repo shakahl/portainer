@@ -159,6 +159,7 @@ func (server *Server) Start() error {
 	var kubernetesHandler = kube.NewHandler(requestBouncer)
 	kubernetesHandler.DataStore = server.DataStore
 	kubernetesHandler.KubernetesClientFactory = server.KubernetesClientFactory
+	kubernetesHandler.JwtService = server.JWTService
 
 	var motdHandler = motd.NewHandler(requestBouncer)
 
