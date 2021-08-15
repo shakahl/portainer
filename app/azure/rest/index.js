@@ -7,7 +7,7 @@ import { Subscription } from './subscription';
 
 export default angular
   .module('portainer.azure.rest', [])
-  .service('ContainerGroup', ContainerGroup)
-  .service('Provider', Provider)
-  .service('ResourceGroup', ResourceGroup)
-  .service('Subscription', Subscription).name;
+  .factory('ContainerGroup', ContainerGroup)
+  .factory('Provider', Provider)
+  .factory('ResourceGroup', ResourceGroup)
+  .factory('Subscription', Subscription).name;
