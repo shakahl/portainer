@@ -82,8 +82,15 @@ class StackRedeployGitFormController {
     return this.$async(async () => {
       try {
         this.state.inProgress = true;
-        await this.StackService.updateGitStackSettings(this.stack.Id, this.stack.EndpointId, this.FormHelper.removeInvalidEnvVars(this.formValues.Env), this.formValues);
+        const stack = await this.StackService.updateGitStackSettings(
+          this.stack.Id,
+          this.stack.EndpointId,
+          this.FormHelper.removeInvalidEnvVars(this.formValues.Env),
+          this.formValues
+        );
         this.Notifications.success('Save stack settings successfully');
+
+        this.stack = stack;
       } catch (err) {
         this.Notifications.error('Failure', err, 'Unable to save stack settings');
       } finally {
@@ -98,6 +105,12 @@ class StackRedeployGitFormController {
 
   handleEnvVarChange(value) {
     this.formValues.Env = value;
+  }
+
+  isAutoUpdateChanged() {
+    const wasEnabled = !!(this.stack.AutoUpdate && (this.stack.AutoUpdate.Interval || this.stack.AutoUpdate.Webhook));
+    const isEnabled = this.formValues.AutoUpdate.RepositoryAutomaticUpdates;
+    return isEnabled !== wasEnabled;
   }
 
   $onInit() {

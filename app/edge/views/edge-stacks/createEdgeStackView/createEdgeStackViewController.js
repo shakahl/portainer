@@ -43,6 +43,14 @@ export class CreateEdgeStackViewController {
     this.onChangeFormValues = this.onChangeFormValues.bind(this);
   }
 
+  templateNameIfAny() {
+    if (this.state.Method !== 'template') {
+      return;
+    }
+
+    return this.selectedTemplate.title;
+  }
+
   async uiCanExit() {
     if (this.state.Method === 'editor' && this.formValues.StackFileContent && this.state.isEditorDirty) {
       return this.ModalService.confirmWebEditorDiscard();

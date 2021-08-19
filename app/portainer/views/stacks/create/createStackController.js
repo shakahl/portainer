@@ -26,6 +26,7 @@ angular
     clipboard
   ) {
     $scope.onChangeTemplateId = onChangeTemplateId;
+    $scope.buildAnalyticsProperties = buildAnalyticsProperties;
 
     $scope.formValues = {
       Name: '',
@@ -54,6 +55,8 @@ angular
       editorYamlValidationError: '',
       uploadYamlValidationError: '',
       isEditorDirty: false,
+      selectedTemplate: null,
+      selectedTemplateId: null,
     };
 
     $window.onbeforeunload = () => {
@@ -75,6 +78,21 @@ angular
     $scope.removeAdditionalFiles = function (index) {
       $scope.formValues.AdditionalFiles.splice(index, 1);
     };
+
+    function buildAnalyticsProperties() {
+      const metadata = { type: $scope.state.Method };
+
+      if ($scope.state.Method === 'repository') {
+        metadata.autoSync = $scope.formValues.RepositoryAutomaticUpdates ? 1 : 0;
+        metadata.auth = $scope.formValues.RepositoryAuthentication ? 1 : 0;
+      }
+
+      if ($scope.state.Method === 'template') {
+        metadata.templateName = $scope.state.selectedTemplate.Title;
+      }
+
+      return { metadata };
+    }
 
     function validateForm(accessControlData, isAdmin) {
       $scope.state.formValidationError = '';
@@ -238,10 +256,11 @@ angular
       }
     };
 
-    function onChangeTemplateId(templateId) {
+    function onChangeTemplateId(templateId, template) {
       return $async(async () => {
         try {
-          $scope.state.templateId = templateId;
+          $scope.state.selectedTemplateId = templateId;
+          $scope.state.selectedTemplate = template;
 
           const fileContent = await CustomTemplateService.customTemplateFile(templateId);
           $scope.onChangeFileContent(fileContent);

@@ -80,6 +80,11 @@
                 ng-disabled="$ctrl.state.actionInProgress || !$ctrl.isFormChanged()"
                 ng-click="$ctrl.save()"
                 button-spinner="$ctrl.state.actionInProgress"
+                analytics-on
+                analytics-if="$ctrl.wasHTTPsForced()"
+                analytics-category="portainer"
+                analytics-event="portainer-settings-ssl"
+                analytics-properties="{ metadata: { forceHTTPS: 1 } }"
               >
                 <span ng-hide="$ctrl.state.actionInProgress || $ctrl.state.reloadingPage">Apply Changes</span>
                 <span ng-show="$ctrl.state.actionInProgress">Saving in progress...</span>

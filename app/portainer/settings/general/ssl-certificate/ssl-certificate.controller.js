@@ -51,6 +51,10 @@ class SslCertificateController {
     });
   }
 
+  wasHTTPsForced() {
+    return this.isFormChanged() && this.formValues.forceHTTPS;
+  }
+
   async $onInit() {
     return this.$async(async () => {
       try {

@@ -6,10 +6,11 @@ import { KubernetesDeployManifestTypes, KubernetesDeployBuildMethods, Kubernetes
 import { buildOption } from '@/portainer/components/box-selector';
 class KubernetesDeployController {
   /* @ngInject */
-  constructor($async, $state, $window, ModalService, Notifications, EndpointProvider, KubernetesResourcePoolService, StackService) {
+  constructor($async, $state, $window, Authentication, ModalService, Notifications, EndpointProvider, KubernetesResourcePoolService, StackService) {
     this.$async = $async;
     this.$state = $state;
     this.$window = $window;
+    this.Authentication = Authentication;
     this.ModalService = ModalService;
     this.Notifications = Notifications;
     this.EndpointProvider = EndpointProvider;
@@ -47,6 +48,47 @@ class KubernetesDeployController {
     this.onChangeFormValues = this.onChangeFormValues.bind(this);
     this.onRepoUrlChange = this.onRepoUrlChange.bind(this);
     this.onRepoRefChange = this.onRepoRefChange.bind(this);
+    this.buildAnalyticsProperties = this.buildAnalyticsProperties.bind(this);
+  }
+
+  buildAnalyticsProperties() {
+    const metadata = {
+      type: buildLabel(this.state.BuildMethod),
+      format: formatLabel(this.state.DeployType),
+      role: roleLabel(this.Authentication.isAdmin()),
+    };
+
+    if (this.state.BuildMethod === KubernetesDeployBuildMethods.GIT) {
+      metadata.auth = this.formValues.RepositoryAuthentication ? 1 : 0;
+    }
+
+    return { metadata };
+
+    function roleLabel(isAdmin) {
+      if (isAdmin) {
+        return 'admin';
+      }
+
+      return 'standard';
+    }
+
+    function buildLabel(buildMethod) {
+      switch (buildMethod) {
+        case KubernetesDeployBuildMethods.GIT:
+          return 'git';
+        case KubernetesDeployBuildMethods.WEB_EDITOR:
+          return 'web-editor';
+      }
+    }
+
+    function formatLabel(format) {
+      switch (format) {
+        case KubernetesDeployManifestTypes.COMPOSE:
+          return 'compose';
+        case KubernetesDeployManifestTypes.KUBERNETES:
+          return 'kubernetes';
+      }
+    }
   }
 
   disableDeploy() {
