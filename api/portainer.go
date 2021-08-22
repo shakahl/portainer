@@ -1279,6 +1279,7 @@ type (
 		SetTunnelStatusToRequired(endpointID EndpointID) error
 		SetTunnelStatusToIdle(endpointID EndpointID)
 		GetTunnelDetails(endpointID EndpointID) *TunnelDetails
+		GetActiveTunnel(endpoint *Endpoint) (*TunnelDetails, error)
 		AddEdgeJob(endpointID EndpointID, edgeJob *EdgeJob)
 		RemoveEdgeJob(edgeJobID EdgeJobID)
 	}
