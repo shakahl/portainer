@@ -17,13 +17,12 @@ import (
 // ComposeStackManager is a wrapper for docker-compose binary
 type ComposeStackManager struct {
 	wrapper      *wrapper.ComposeWrapper
-	configPath   string
 	proxyManager *proxy.Manager
 }
 
 // NewComposeStackManager returns a docker-compose wrapper if corresponding binary present, otherwise nil
 func NewComposeStackManager(binaryPath string, configPath string, proxyManager *proxy.Manager) (*ComposeStackManager, error) {
-	wrap, err := wrapper.NewComposeWrapper(binaryPath)
+	wrap, err := wrapper.NewComposeWrapper(binaryPath, configPath)
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +30,6 @@ func NewComposeStackManager(binaryPath string, configPath string, proxyManager *
 	return &ComposeStackManager{
 		wrapper:      wrap,
 		proxyManager: proxyManager,
-		configPath:   configPath,
 	}, nil
 }
 
@@ -57,7 +55,7 @@ func (w *ComposeStackManager) Up(stack *portainer.Stack, endpoint *portainer.End
 	}
 
 	filePaths := append([]string{stack.EntryPoint}, stack.AdditionalFiles...)
-	_, err = w.wrapper.Up(filePaths, stack.ProjectPath, url, stack.Name, envFilePath, w.configPath)
+	_, err = w.wrapper.Up(filePaths, stack.ProjectPath, url, stack.Name, envFilePath)
 	return errors.Wrap(err, "failed to deploy a stack")
 }
 
@@ -93,7 +91,7 @@ func (w *ComposeStackManager) fetchEndpointProxy(endpoint *portainer.Endpoint) (
 		return "", nil, err
 	}
 
-	return fmt.Sprintf("http://127.0.0.1:%d", proxy.Port), proxy, nil
+	return fmt.Sprintf("tcp://127.0.0.1:%d", proxy.Port), proxy, nil
 }
 
 func createEnvFile(stack *portainer.Stack) (string, error) {

@@ -241,8 +241,8 @@ github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINE
 github.com/pmezard/go-difflib v0.0.0-20151028094244-d8ed2627bdf0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/portainer/docker-compose-wrapper v0.0.0-20210810234209-d01bc85eb481 h1:5c8N9Gh21Ja/9EIpfyHFmQvTCKgOjnRhosmo0ZshkFk=
-github.com/portainer/docker-compose-wrapper v0.0.0-20210810234209-d01bc85eb481/go.mod h1:WxDlJWZxCnicdLCPnLNEv7/gRhjeIVuCGmsv+iOPH3c=
+github.com/portainer/docker-compose-wrapper v0.0.0-20210823143927-68170836d6c0 h1:k8KU5Flrk86R3IDGJdBpnisDrypLg+RxHPgasd4eTb4=
+github.com/portainer/docker-compose-wrapper v0.0.0-20210823143927-68170836d6c0/go.mod h1:WxDlJWZxCnicdLCPnLNEv7/gRhjeIVuCGmsv+iOPH3c=
 github.com/portainer/libcompose v0.5.3 h1:tE4WcPuGvo+NKeDkDWpwNavNLZ5GHIJ4RvuZXsI9uI8=
 github.com/portainer/libcompose v0.5.3/go.mod h1:7SKd/ho69rRKHDFSDUwkbMcol2TMKU5OslDsajr8Ro8=
 github.com/portainer/libcrypto v0.0.0-20210422035235-c652195c5c3a h1:qY8TbocN75n5PDl16o0uVr5MevtM5IhdwSelXEd4nFM=
