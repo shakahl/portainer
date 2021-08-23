@@ -59,7 +59,7 @@ class KubernetesDeployController {
     };
 
     if (this.state.BuildMethod === KubernetesDeployBuildMethods.GIT) {
-      metadata.auth = this.formValues.RepositoryAuthentication ? 1 : 0;
+      metadata.auth = this.formValues.RepositoryAuthentication;
     }
 
     return { metadata };
@@ -86,7 +86,7 @@ class KubernetesDeployController {
         case KubernetesDeployManifestTypes.COMPOSE:
           return 'compose';
         case KubernetesDeployManifestTypes.KUBERNETES:
-          return 'kubernetes';
+          return 'manifest';
       }
     }
   }

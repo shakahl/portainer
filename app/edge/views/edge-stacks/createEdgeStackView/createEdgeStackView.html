@@ -200,8 +200,8 @@
                 button-spinner="$ctrl.state.actionInProgress"
                 analytics-on
                 analytics-event="edge-stack-creation"
-                analytics-category="docker"
-                analytics-properties="{metadata:{type: $ctrl.state.Method, format:'compose', templateName: $ctrl.templateNameIfAny() }}"
+                analytics-category="edge"
+                analytics-properties="$ctrl.buildAnalyticsProperties()"
               >
                 <span ng-hide="$ctrl.state.actionInProgress">Deploy the stack</span>
                 <span ng-show="$ctrl.state.actionInProgress">Deployment in progress...</span>

@@ -80,11 +80,11 @@ angular
     };
 
     function buildAnalyticsProperties() {
-      const metadata = { type: $scope.state.Method };
+      const metadata = { type: methodLabel($scope.state.Method) };
 
       if ($scope.state.Method === 'repository') {
-        metadata.autoSync = $scope.formValues.RepositoryAutomaticUpdates ? 1 : 0;
-        metadata.auth = $scope.formValues.RepositoryAuthentication ? 1 : 0;
+        metadata.automaticUpdates = $scope.formValues.RepositoryAutomaticUpdates;
+        metadata.auth = $scope.formValues.RepositoryAuthentication;
       }
 
       if ($scope.state.Method === 'template') {
@@ -92,6 +92,19 @@ angular
       }
 
       return { metadata };
+
+      function methodLabel(method) {
+        switch (method) {
+          case 'editor':
+            return 'web-editor';
+          case 'repository':
+            return 'git';
+          case 'upload':
+            return 'file-upload';
+          case 'template':
+            return 'custom-template';
+        }
+      }
     }
 
     function validateForm(accessControlData, isAdmin) {
