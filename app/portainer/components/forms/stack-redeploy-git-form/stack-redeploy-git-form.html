@@ -68,7 +68,7 @@
     analytics-if="$ctrl.isAutoUpdateChanged()"
     analytics-event="docker-stack-update-git-settings"
     analytics-category="docker"
-    analytics-properties="{ metadata: { autoSync: $ctrl.formValues.AutoUpdate.RepositoryAutomaticUpdates ? 1 : 0}}"
+    analytics-properties="$ctrl.buildAnalyticsProperties()"
   >
     <span ng-hide="$ctrl.state.inProgress"> Save settings </span>
     <span ng-show="$ctrl.state.inProgress">In progress...</span>

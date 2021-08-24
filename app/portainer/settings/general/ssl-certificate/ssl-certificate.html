@@ -83,8 +83,8 @@
                 analytics-on
                 analytics-if="$ctrl.wasHTTPsForced()"
                 analytics-category="portainer"
-                analytics-event="portainer-settings-ssl"
-                analytics-properties="{ metadata: { forceHTTPS: 1 } }"
+                analytics-event="portainer-settings-edit"
+                analytics-properties="{ metadata: { forceHTTPS: true } }"
               >
                 <span ng-hide="$ctrl.state.actionInProgress || $ctrl.state.reloadingPage">Apply Changes</span>
                 <span ng-show="$ctrl.state.actionInProgress">Saving in progress...</span>

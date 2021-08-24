@@ -463,10 +463,6 @@
                 ng-disabled="state.actionInProgress || !endpointCreationForm.$valid"
                 ng-click="addAgentEndpoint()"
                 button-spinner="state.actionInProgress"
-                analytics-on
-                analytics-category="portainer"
-                analytics-event="portainer-endpoint-creation"
-                analytics-properties="{ metadata: { type: 'agent' } }"
               >
                 <span ng-hide="state.actionInProgress"><i class="fa fa-plus" aria-hidden="true"></i> Add endpoint</span>
                 <span ng-show="state.actionInProgress">Creating endpoint...</span>

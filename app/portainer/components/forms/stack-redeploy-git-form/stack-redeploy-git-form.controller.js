@@ -23,7 +23,7 @@ class StackRedeployGitFormController {
       RepositoryUsername: '',
       RepositoryPassword: '',
       Env: [],
-      // auto upadte
+      // auto update
       AutoUpdate: {
         RepositoryAutomaticUpdates: false,
         RepositoryMechanism: 'Interval',
@@ -35,6 +35,25 @@ class StackRedeployGitFormController {
     this.onChange = this.onChange.bind(this);
     this.onChangeRef = this.onChangeRef.bind(this);
     this.handleEnvVarChange = this.handleEnvVarChange.bind(this);
+  }
+
+  buildAnalyticsProperties() {
+    const metadata = {};
+
+    if (this.formValues.RepositoryAutomaticUpdates) {
+      metadata.automaticUpdates = autoSyncLabel(this.formValues.RepositoryMechanism);
+    }
+    return { metadata };
+
+    function autoSyncLabel(type) {
+      switch (type) {
+        case 'Interval':
+          return 'polling';
+        case 'Webhook':
+          return 'webhook';
+      }
+      return 'off';
+    }
   }
 
   onChangeRef(value) {

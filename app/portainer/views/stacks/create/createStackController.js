@@ -83,7 +83,10 @@ angular
       const metadata = { type: methodLabel($scope.state.Method) };
 
       if ($scope.state.Method === 'repository') {
-        metadata.automaticUpdates = $scope.formValues.RepositoryAutomaticUpdates;
+        metadata.automaticUpdates = 'off';
+        if ($scope.formValues.RepositoryAutomaticUpdates) {
+          metadata.automaticUpdates = autoSyncLabel($scope.formValues.RepositoryMechanism);
+        }
         metadata.auth = $scope.formValues.RepositoryAuthentication;
       }
 
@@ -104,6 +107,16 @@ angular
           case 'template':
             return 'custom-template';
         }
+      }
+
+      function autoSyncLabel(type) {
+        switch (type) {
+          case 'Interval':
+            return 'polling';
+          case 'Webhook':
+            return 'webhook';
+        }
+        return 'off';
       }
     }
 
